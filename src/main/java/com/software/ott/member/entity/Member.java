@@ -20,8 +20,6 @@ public class Member {
     @NotNull
     @Column(unique = true)
     private String email;
-    @NotNull
-    private int point;
 
     public Member(String name, String email) {
         this.name = name;
