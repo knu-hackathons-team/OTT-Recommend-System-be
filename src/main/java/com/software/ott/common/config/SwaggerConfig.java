@@ -28,7 +28,7 @@ public class SwaggerConfig {
     private Info apiInfo() {
         return new Info()
                 .title("OTT Recommend System 명세서")
-                .description("화이팅!")
-                .version("0.0.1");
+                .description("BACKEND: 이지호")
+                .version("0.0.2");
     }
 }
