@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/like")
-@Tag(name = "좋아요 싫어요", description = "컨텐츠 좋아요 싫어요 관련 API")
+@Tag(name = "좋아요/싫어요", description = "컨텐츠 좋아요 싫어요 관련 API")
 public class ContentLikeController {
 
     private final ContentLikeService contentLikeService;
