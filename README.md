@@ -9,7 +9,7 @@
 - 카카오 계정으로 간편하게 로그인하고 이용가능
 
 ## Usecase Diagram
-![image](https://github.com/user-attachments/assets/c55f2959-2aa8-409a-a9e0-d0a151fe1ac4)
+![image](https://github.com/user-attachments/assets/f5889703-9f0e-4801-b04b-635472a9adc2)
 
 ## ERD
 ![image](https://github.com/user-attachments/assets/0deeb25c-6a0e-4c7f-a5ae-08baf2cab785)
