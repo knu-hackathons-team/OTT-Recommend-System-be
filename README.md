@@ -1,6 +1,6 @@
 # OTT 추천 시스템
 ---
-### 서비스 이용하기 : [ott.knu-soft.site](www.ott.knu-soft.site)
+### 서비스 이용하기 : [ott.knu-soft.site](http://ott.knu-soft.site)
 
 #### ⚠️ 개발 진행 중 입니다 ‼️
 ---
