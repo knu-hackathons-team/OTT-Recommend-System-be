@@ -17,3 +17,6 @@
 ## API 명세서
 ### Swagger 링크
 ### [http://ott.knu-soft.site/swagger-ui/index.html](http://ott.knu-soft.site/swagger-ui/index.html#/)
+
+## 웹 서버 아키텍쳐
+![image](https://github.com/user-attachments/assets/44a58c4e-7435-45d0-915f-b314e422c2d2)
