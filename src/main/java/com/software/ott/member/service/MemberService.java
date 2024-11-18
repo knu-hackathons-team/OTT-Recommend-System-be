@@ -12,6 +12,7 @@ import com.software.ott.common.exception.NotFoundException;
 import com.software.ott.member.dto.LoginRequest;
 import com.software.ott.member.entity.Member;
 import com.software.ott.member.repository.MemberRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +29,8 @@ public class MemberService {
     private final KakaoTokenService kakaoTokenService;
 
     @Transactional
-    public TokenResponse kakaoLogin(String authorizationCode) {
-        KakaoTokenResponse kakaoTokenResponse = kakaoApiService.getAccessToken(authorizationCode);
+    public TokenResponse kakaoLogin(String authorizationCode, HttpServletRequest httpServletRequest) {
+        KakaoTokenResponse kakaoTokenResponse = kakaoApiService.getAccessToken(authorizationCode, httpServletRequest);
         KakaoUserResponse kakaoUserResponse = kakaoApiService.getUserInfo(kakaoTokenResponse.accessToken());
 
         String email = kakaoUserResponse.kakaoAccount().email();
