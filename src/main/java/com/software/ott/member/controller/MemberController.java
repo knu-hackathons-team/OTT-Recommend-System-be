@@ -2,6 +2,7 @@ package com.software.ott.member.controller;
 
 import com.software.ott.auth.dto.TokenResponse;
 import com.software.ott.member.dto.LoginRequest;
+import com.software.ott.member.dto.MemberInfoResponse;
 import com.software.ott.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -24,6 +25,13 @@ public class MemberController {
     public ResponseEntity<TokenResponse> tempLogin(@RequestBody LoginRequest request) {
         TokenResponse registerResponse = memberService.tempLogin(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(registerResponse);
+    }
+
+    @Operation(summary = "멤버 정보 조회", description = "멤버의 이름, 이메일을 조회합니다.")
+    @GetMapping("/members/info")
+    public ResponseEntity<MemberInfoResponse> getMemberInfo(@RequestAttribute("memberId") Long memberId) {
+        MemberInfoResponse memberInfoResponse = memberService.getMemberInfo(memberId);
+        return ResponseEntity.ok().body(memberInfoResponse);
     }
 
     @Operation(summary = "멤버 회원탈퇴", description = "회원 정보를 삭제합니다.")

@@ -10,6 +10,7 @@ import com.software.ott.auth.service.TokenService;
 import com.software.ott.common.exception.ConflictException;
 import com.software.ott.common.exception.NotFoundException;
 import com.software.ott.member.dto.LoginRequest;
+import com.software.ott.member.dto.MemberInfoResponse;
 import com.software.ott.member.entity.Member;
 import com.software.ott.member.repository.MemberRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -65,6 +66,14 @@ public class MemberService {
         }
 
         memberRepository.deleteById(memberId);
+    }
+
+    @Transactional(readOnly = true)
+    public MemberInfoResponse getMemberInfo(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new NotFoundException("id에 해당하는 멤버가 없습니다."));
+
+        return new MemberInfoResponse(member.getName(), member.getEmail());
     }
 
     @Transactional
