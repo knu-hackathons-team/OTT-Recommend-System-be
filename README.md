@@ -1,4 +1,4 @@
-# OTT 추천 시스템
+# 넷플릭스 추천 알고리즘 구현 서비스
 ---
 ### 서비스 이용하기 : [ott.knu-soft.site](http://ott.knu-soft.site)
 
