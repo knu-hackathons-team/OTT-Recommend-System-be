@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +20,7 @@ import java.net.URI;
 import java.util.Map;
 
 @RestController
-@RequiredArgsConstructor
-@RequestMapping("/api/auth")
+@RequestMapping("/api")
 @Tag(name = "회원 인증", description = "회원 인증 관련 API")
 public class AuthController {
 
@@ -31,15 +29,22 @@ public class AuthController {
     private final MemberService memberService;
     private final PhoneNumberAuthService phoneNumberAuthService;
 
+    public AuthController(TokenService tokenService, KakaoApiService kakaoApiService, MemberService memberService, PhoneNumberAuthService phoneNumberAuthService) {
+        this.tokenService = tokenService;
+        this.kakaoApiService = kakaoApiService;
+        this.memberService = memberService;
+        this.phoneNumberAuthService = phoneNumberAuthService;
+    }
+
     @Operation(summary = "토큰 재발급", description = "RefreshToken으로 AccessToken과 RefreshToken을 재발급 한다.", security = @SecurityRequirement(name = "JWT제외"))
-    @PostMapping("/refresh")
+    @PostMapping("/auth/refresh")
     public ResponseEntity<TokenResponse> refreshToken(@RequestBody TokenRefreshRequest request) {
         TokenResponse tokenResponse = tokenService.refreshAccessToken(request.refreshToken());
         return ResponseEntity.status(HttpStatus.CREATED).body(tokenResponse);
     }
 
     @Operation(summary = "Oauth 카카오 인증페이지 리다이렉트", description = "카카오 로그인 화면으로 이동한다.", security = @SecurityRequirement(name = "JWT제외"))
-    @GetMapping("/oauth/kakao")
+    @GetMapping("/auth/oauth/kakao")
     public ResponseEntity<Void> redirectToKakaoAuth(HttpServletRequest httpServletRequest) {
         String url = kakaoApiService.getAuthorizationUrl(httpServletRequest);
         HttpHeaders headers = new HttpHeaders();
@@ -48,7 +53,7 @@ public class AuthController {
     }
 
     @Operation(summary = "Oauth 카카오 로그인 콜백", description = "카카오 로그인 이후 발생하는 인가코드를 통해 AccessToken과 RefreshToken을 발급한다.", security = @SecurityRequirement(name = "JWT제외"))
-    @GetMapping("/oauth/kakao/callback")
+    @GetMapping("/auth/oauth/kakao/callback")
     public ResponseEntity<TokenResponse> kakaoCallback(@RequestParam("code") String code, HttpServletRequest httpServletRequest) {
         TokenResponse loginResponse = memberService.kakaoLogin(code, httpServletRequest);
         return ResponseEntity.ok().body(loginResponse);
@@ -56,8 +61,8 @@ public class AuthController {
 
     @Operation(summary = "전화번호 인증용 qr 생성", description = "사용자 전화번호 인증용 qr을 생성합니다.")
     @GetMapping("/qr")
-    public ResponseEntity<byte[]> generateQRCode() {
-        byte[] qrCodeImage = phoneNumberAuthService.generateQRCodeAsByteArray();
+    public ResponseEntity<byte[]> generateQRCode(@RequestAttribute("memberId") Long memberId, @RequestBody String phoneNumber) {
+        byte[] qrCodeImage = phoneNumberAuthService.generateQRCodeAsByteArray(memberId, phoneNumber);
         if (qrCodeImage != null) {
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_TYPE, "image/png")
@@ -67,14 +72,15 @@ public class AuthController {
         }
     }
 
+    @Operation(summary = "twilio 웹훅 서버 post용 api", description = "직접 사용 x")
     @PostMapping("/twilio/sms")
     public void receiveSms(@RequestParam Map<String, String> params) {
-        String from = params.get("From");
-        String to = params.get("To");
-        String body = params.get("Body");
+        phoneNumberAuthService.authPhoneNumber(params);
+    }
 
-        System.out.println("From: " + from);
-        System.out.println("To: " + to);
-        System.out.println("Body: " + body);
+    @Operation(summary = "인증된 전화번호 member 등록", description = "인증된 전화번호를 멤버에 등록합니다.")
+    @PostMapping("/save")
+    public void savePhoneNumber(@RequestAttribute("memberId") Long memberId, String phoneNumber) {
+        phoneNumberAuthService.addPhoneNumber(memberId, phoneNumber);
     }
 }
