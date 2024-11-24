@@ -70,6 +70,9 @@ public class PhoneNumberAuthService {
         String from = params.get("From");
         String body = params.get("Body");
 
+        System.out.println(from);
+        System.out.println(body);
+
         if (hashStore.containsKey(from) && hashStore.get(from).equals(body)) {
             hashStore.remove(from);
             if (!checkPhoneNumber.containsKey(from)) {
