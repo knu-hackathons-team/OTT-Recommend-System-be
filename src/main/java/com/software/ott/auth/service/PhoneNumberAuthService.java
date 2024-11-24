@@ -94,7 +94,7 @@ public class PhoneNumberAuthService {
 
             checkPhoneNumber.remove(phoneNumber);
         } else {
-            throw new BadRequestException("멤버 번호가 인증되지 않았습니다.");
+            throw new BadRequestException("멤버 번호가 인증되지 않았거나, 이미 등록되었습니다.");
         }
     }
 }
