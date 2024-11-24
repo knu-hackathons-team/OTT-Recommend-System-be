@@ -74,7 +74,7 @@ public class AuthController {
 
     @Operation(summary = "twilio 웹훅 서버 post용 api", description = "직접 사용 x")
     @PostMapping("/twilio/sms")
-    public void receiveSms(@RequestParam Map<String, String> params) {
+    public void receiveSms(@RequestBody Map<String, String> params) {
         phoneNumberAuthService.authPhoneNumber(params);
     }
 
