@@ -74,13 +74,15 @@ public class AuthController {
 
     @Operation(summary = "twilio 웹훅 서버 post용 api", description = "직접 사용 x")
     @PostMapping("/twilio/sms")
-    public void receiveSms(@RequestBody Map<String, String> params) {
+    public ResponseEntity<Void> receiveSms(@RequestBody Map<String, String> params) {
         phoneNumberAuthService.authPhoneNumber(params);
+        return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "인증된 전화번호 member 등록", description = "인증된 전화번호를 멤버에 등록합니다.")
     @PostMapping("/save")
-    public void savePhoneNumber(@RequestAttribute("memberId") Long memberId, String phoneNumber) {
+    public ResponseEntity<Void> savePhoneNumber(@RequestAttribute("memberId") Long memberId, String phoneNumber) {
         phoneNumberAuthService.addPhoneNumber(memberId, phoneNumber);
+        return ResponseEntity.ok().build();
     }
 }
