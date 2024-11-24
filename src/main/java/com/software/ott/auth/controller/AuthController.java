@@ -61,7 +61,7 @@ public class AuthController {
 
     @Operation(summary = "전화번호 인증용 qr 생성", description = "사용자 전화번호 인증용 qr을 생성합니다.")
     @GetMapping("/qr")
-    public ResponseEntity<byte[]> generateQRCode(@RequestAttribute("memberId") Long memberId, @RequestBody String phoneNumber) {
+    public ResponseEntity<byte[]> generateQRCode(@RequestAttribute("memberId") Long memberId, @RequestParam String phoneNumber) {
         byte[] qrCodeImage = phoneNumberAuthService.generateQRCodeAsByteArray(memberId, phoneNumber);
         if (qrCodeImage != null) {
             return ResponseEntity.ok()
