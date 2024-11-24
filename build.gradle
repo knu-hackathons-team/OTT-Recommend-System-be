@@ -39,6 +39,8 @@ dependencies {
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.6.0'
 	implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
 	implementation 'org.apache.commons:commons-csv:1.10.0'
+	implementation 'com.google.zxing:core:3.5.1'
+	implementation 'com.google.zxing:javase:3.5.1'
 }
 
 tasks.named('test') {
