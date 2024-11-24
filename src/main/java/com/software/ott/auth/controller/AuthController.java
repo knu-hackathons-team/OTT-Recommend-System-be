@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -64,5 +65,16 @@ public class AuthController {
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @PostMapping("/twilio/sms")
+    public void receiveSms(@RequestParam Map<String, String> params) {
+        String from = params.get("From");
+        String to = params.get("To");
+        String body = params.get("Body");
+
+        System.out.println("From: " + from);
+        System.out.println("To: " + to);
+        System.out.println("Body: " + body);
     }
 }
