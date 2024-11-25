@@ -25,12 +25,11 @@ public class CsvContentService {
     @Transactional
     public void saveContentFromCsv() {
         try {
-            // CSV 파일 읽기
-            ClassPathResource resource = new ClassPathResource("contents.csv");
+            ClassPathResource resource = new ClassPathResource("contents_with_poster.csv");
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8)
             );
-            String[] headers = {"num", "show_id", "type", "title", "director", "cast", "country", "date_added", "release_year", "rating", "duration", "listed_in", "description"};
+            String[] headers = {"num", "show_id", "type", "title", "director", "cast", "country", "date_added", "release_year", "rating", "duration", "listed_in", "description", "poster_path"};
             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withHeader(headers));
 
             List<Content> contents = new ArrayList<>();
@@ -50,6 +49,7 @@ public class CsvContentService {
                 content.setDuration(record.get("duration"));
                 content.setListedIn(record.get("listed_in"));
                 content.setDescription(record.get("description"));
+                content.setPosterPath(record.get("poster_path"));
 
                 contents.add(content);
             }

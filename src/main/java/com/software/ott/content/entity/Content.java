@@ -28,4 +28,5 @@ public class Content {
     private String listedIn;
     @Column(length = 1000)
     private String description;
+    private String posterPath;
 }
