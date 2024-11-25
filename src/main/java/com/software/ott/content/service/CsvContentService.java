@@ -25,7 +25,7 @@ public class CsvContentService {
     @Transactional
     public void saveContentFromCsv() {
         try {
-            ClassPathResource resource = new ClassPathResource("contents_with_poster.csv");
+            ClassPathResource resource = new ClassPathResource("content_poster.csv");
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8)
             );
