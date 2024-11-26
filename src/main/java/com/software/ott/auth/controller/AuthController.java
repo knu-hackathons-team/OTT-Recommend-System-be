@@ -4,6 +4,7 @@ package com.software.ott.auth.controller;
 import com.software.ott.auth.dto.TokenRefreshRequest;
 import com.software.ott.auth.dto.TokenResponse;
 import com.software.ott.auth.service.KakaoApiService;
+import com.software.ott.auth.service.NaverApiService;
 import com.software.ott.auth.service.PhoneNumberAuthService;
 import com.software.ott.auth.service.TokenService;
 import com.software.ott.member.service.MemberService;
@@ -28,12 +29,14 @@ public class AuthController {
     private final KakaoApiService kakaoApiService;
     private final MemberService memberService;
     private final PhoneNumberAuthService phoneNumberAuthService;
+    private final NaverApiService naverApiService;
 
-    public AuthController(TokenService tokenService, KakaoApiService kakaoApiService, MemberService memberService, PhoneNumberAuthService phoneNumberAuthService) {
+    public AuthController(TokenService tokenService, KakaoApiService kakaoApiService, MemberService memberService, PhoneNumberAuthService phoneNumberAuthService, NaverApiService naverApiService) {
         this.tokenService = tokenService;
         this.kakaoApiService = kakaoApiService;
         this.memberService = memberService;
         this.phoneNumberAuthService = phoneNumberAuthService;
+        this.naverApiService = naverApiService;
     }
 
     @Operation(summary = "토큰 재발급", description = "RefreshToken으로 AccessToken과 RefreshToken을 재발급 한다.", security = @SecurityRequirement(name = "JWT제외"))
@@ -56,6 +59,22 @@ public class AuthController {
     @GetMapping("/auth/oauth/kakao/callback")
     public ResponseEntity<TokenResponse> kakaoCallback(@RequestParam("code") String code, HttpServletRequest httpServletRequest) {
         TokenResponse loginResponse = memberService.kakaoLogin(code, httpServletRequest);
+        return ResponseEntity.ok().body(loginResponse);
+    }
+
+    @Operation(summary = "Oauth 네이버 인증페이지 리다이렉트", description = "네이버 로그인 화면으로 이동한다.", security = @SecurityRequirement(name = "JWT제외"))
+    @GetMapping("/auth/oauth/naver")
+    public ResponseEntity<Void> redirectToNaverAuth(HttpServletRequest httpServletRequest) {
+        String url = naverApiService.getNaverLoginUrl(httpServletRequest);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create(url));
+        return new ResponseEntity<>(headers, HttpStatus.FOUND);
+    }
+
+    @Operation(summary = "Oauth 네이버 로그인 콜백", description = "네이버 로그인 이후 발생하는 인가코드를 통해 AccessToken을 발급받고 사용자 정보를 조회한다.", security = @SecurityRequirement(name = "JWT제외"))
+    @GetMapping("/auth/oauth/naver/callback")
+    public ResponseEntity<TokenResponse> naverCallback(@RequestParam("code") String code, @RequestParam("state") String state, HttpServletRequest httpServletRequest) {
+        TokenResponse loginResponse = memberService.naverLogin(code, state, httpServletRequest);
         return ResponseEntity.ok().body(loginResponse);
     }
 

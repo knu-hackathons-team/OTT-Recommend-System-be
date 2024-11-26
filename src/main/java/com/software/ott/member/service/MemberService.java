@@ -1,11 +1,10 @@
 package com.software.ott.member.service;
 
 
-import com.software.ott.auth.dto.KakaoTokenResponse;
-import com.software.ott.auth.dto.KakaoUserResponse;
-import com.software.ott.auth.dto.TokenResponse;
+import com.software.ott.auth.dto.*;
 import com.software.ott.auth.service.KakaoApiService;
 import com.software.ott.auth.service.KakaoTokenService;
+import com.software.ott.auth.service.NaverApiService;
 import com.software.ott.auth.service.TokenService;
 import com.software.ott.common.exception.ConflictException;
 import com.software.ott.common.exception.NotFoundException;
@@ -28,6 +27,7 @@ public class MemberService {
     private final TokenService tokenService;
     private final KakaoApiService kakaoApiService;
     private final KakaoTokenService kakaoTokenService;
+    private final NaverApiService naverApiService;
 
     @Transactional
     public TokenResponse kakaoLogin(String authorizationCode, HttpServletRequest httpServletRequest) {
@@ -42,6 +42,25 @@ public class MemberService {
 
         if (optionalMember.isEmpty()) {
             registerNewMember(kakaoUserResponse.kakaoAccount().profile().nickname(), email);
+        }
+
+        String accessToken = tokenService.generateAccessToken(email);
+        String refreshToken = tokenService.generateRefreshToken(email);
+
+        return new TokenResponse(accessToken, refreshToken);
+    }
+
+    @Transactional
+    public TokenResponse naverLogin(String code, String state, HttpServletRequest httpServletRequest) {
+        NaverTokenResponse tokenResponse = naverApiService.getAccessToken(code, state, httpServletRequest);
+        NaverUserResponse naverUserResponse = naverApiService.getUserInfo(tokenResponse.accessToken());
+
+        String email = naverUserResponse.response().email();
+
+        Optional<Member> optionalMember = memberRepository.findByEmail(email);
+
+        if (optionalMember.isEmpty()) {
+            registerNewMember(naverUserResponse.response().name(), email);
         }
 
         String accessToken = tokenService.generateAccessToken(email);

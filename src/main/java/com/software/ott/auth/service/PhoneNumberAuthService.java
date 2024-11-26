@@ -27,6 +27,7 @@ public class PhoneNumberAuthService {
     private final MemberRepository memberRepository;
     private final Map<String, String> hashStore = new ConcurrentHashMap<>();
     private final Map<String, Boolean> checkPhoneNumber = new ConcurrentHashMap<>();
+
     public PhoneNumberAuthService(CommonProperties commonProperties, MemberPhoneNumberRepository memberPhoneNumberRepository, MemberRepository memberRepository) {
         this.commonProperties = commonProperties;
         this.memberPhoneNumberRepository = memberPhoneNumberRepository;
