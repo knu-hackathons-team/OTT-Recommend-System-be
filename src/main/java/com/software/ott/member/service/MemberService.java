@@ -2,10 +2,7 @@ package com.software.ott.member.service;
 
 
 import com.software.ott.auth.dto.*;
-import com.software.ott.auth.service.KakaoApiService;
-import com.software.ott.auth.service.KakaoTokenService;
-import com.software.ott.auth.service.NaverApiService;
-import com.software.ott.auth.service.TokenService;
+import com.software.ott.auth.service.*;
 import com.software.ott.common.exception.ConflictException;
 import com.software.ott.common.exception.NotFoundException;
 import com.software.ott.member.dto.LoginRequest;
@@ -28,6 +25,7 @@ public class MemberService {
     private final KakaoApiService kakaoApiService;
     private final KakaoTokenService kakaoTokenService;
     private final NaverApiService naverApiService;
+    private final GoogleApiService googleApiService;
 
     @Transactional
     public TokenResponse kakaoLogin(String authorizationCode, HttpServletRequest httpServletRequest) {
@@ -52,8 +50,8 @@ public class MemberService {
 
     @Transactional
     public TokenResponse naverLogin(String code, String state, HttpServletRequest httpServletRequest) {
-        NaverTokenResponse tokenResponse = naverApiService.getAccessToken(code, state, httpServletRequest);
-        NaverUserResponse naverUserResponse = naverApiService.getUserInfo(tokenResponse.accessToken());
+        NaverTokenResponse naverTokenResponse = naverApiService.getAccessToken(code, state, httpServletRequest);
+        NaverUserResponse naverUserResponse = naverApiService.getUserInfo(naverTokenResponse.accessToken());
 
         String email = naverUserResponse.response().email();
 
@@ -61,6 +59,25 @@ public class MemberService {
 
         if (optionalMember.isEmpty()) {
             registerNewMember(naverUserResponse.response().name(), email);
+        }
+
+        String accessToken = tokenService.generateAccessToken(email);
+        String refreshToken = tokenService.generateRefreshToken(email);
+
+        return new TokenResponse(accessToken, refreshToken);
+    }
+
+    @Transactional
+    public TokenResponse googleLogin(String code, HttpServletRequest httpServletRequest) {
+        GoogleTokenResponse googleTokenResponse = googleApiService.getAccessToken(code, httpServletRequest);
+        GoogleUserResponse googleUserResponse = googleApiService.getUserInfo(googleTokenResponse.accessToken());
+
+        String email = googleUserResponse.email();
+
+        Optional<Member> optionalMember = memberRepository.findByEmail(email);
+
+        if (optionalMember.isEmpty()) {
+            registerNewMember(googleUserResponse.name(), googleUserResponse.email());
         }
 
         String accessToken = tokenService.generateAccessToken(email);

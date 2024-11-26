@@ -3,10 +3,7 @@ package com.software.ott.auth.controller;
 
 import com.software.ott.auth.dto.TokenRefreshRequest;
 import com.software.ott.auth.dto.TokenResponse;
-import com.software.ott.auth.service.KakaoApiService;
-import com.software.ott.auth.service.NaverApiService;
-import com.software.ott.auth.service.PhoneNumberAuthService;
-import com.software.ott.auth.service.TokenService;
+import com.software.ott.auth.service.*;
 import com.software.ott.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -30,13 +27,15 @@ public class AuthController {
     private final MemberService memberService;
     private final PhoneNumberAuthService phoneNumberAuthService;
     private final NaverApiService naverApiService;
+    private final GoogleApiService googleApiService;
 
-    public AuthController(TokenService tokenService, KakaoApiService kakaoApiService, MemberService memberService, PhoneNumberAuthService phoneNumberAuthService, NaverApiService naverApiService) {
+    public AuthController(TokenService tokenService, KakaoApiService kakaoApiService, MemberService memberService, PhoneNumberAuthService phoneNumberAuthService, NaverApiService naverApiService, GoogleApiService googleApiService) {
         this.tokenService = tokenService;
         this.kakaoApiService = kakaoApiService;
         this.memberService = memberService;
         this.phoneNumberAuthService = phoneNumberAuthService;
         this.naverApiService = naverApiService;
+        this.googleApiService = googleApiService;
     }
 
     @Operation(summary = "토큰 재발급", description = "RefreshToken으로 AccessToken과 RefreshToken을 재발급 한다.", security = @SecurityRequirement(name = "JWT제외"))
@@ -75,6 +74,22 @@ public class AuthController {
     @GetMapping("/auth/oauth/naver/callback")
     public ResponseEntity<TokenResponse> naverCallback(@RequestParam("code") String code, @RequestParam("state") String state, HttpServletRequest httpServletRequest) {
         TokenResponse loginResponse = memberService.naverLogin(code, state, httpServletRequest);
+        return ResponseEntity.ok().body(loginResponse);
+    }
+
+    @Operation(summary = "Oauth 구글 인증페이지 리다이렉트", description = "구글 로그인 화면으로 이동한다.", security = @SecurityRequirement(name = "JWT제외"))
+    @GetMapping("/auth/oauth/google")
+    public ResponseEntity<Void> redirectToGoogleAuth(HttpServletRequest httpServletRequest) {
+        String url = googleApiService.getGoogleLoginUrl(httpServletRequest);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create(url));
+        return new ResponseEntity<>(headers, HttpStatus.FOUND);
+    }
+
+    @Operation(summary = "Oauth 구글 로그인 콜백", description = "구글 로그인 이후 발생하는 인가코드를 통해 AccessToken을 발급받고 사용자 정보를 조회한다.", security = @SecurityRequirement(name = "JWT제외"))
+    @GetMapping("/auth/oauth/google/callback")
+    public ResponseEntity<TokenResponse> googleCallback(@RequestParam("code") String code, HttpServletRequest httpServletRequest) {
+        TokenResponse loginResponse = memberService.googleLogin(code, httpServletRequest);
         return ResponseEntity.ok().body(loginResponse);
     }
 
