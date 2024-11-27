@@ -11,6 +11,8 @@ import com.software.ott.history.repository.WatchHistoryRepository;
 import com.software.ott.member.entity.Member;
 import com.software.ott.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,7 +70,8 @@ public class WatchHistoryService {
 
     @Transactional
     public List<TopWatchHistoryResponse> getTop10WatchedContents() {
-        List<Object[]> topContents = watchHistoryRepository.findTop10MostWatchedContents();
+        Pageable top10 = PageRequest.of(0, 10);
+        List<Object[]> topContents = watchHistoryRepository.findTop10MostWatchedContents(top10);
 
         return topContents.stream()
                 .map(result -> {
