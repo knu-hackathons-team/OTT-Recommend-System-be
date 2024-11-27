@@ -1,9 +1,8 @@
 package com.software.ott.friend.controller;
 
 import com.software.ott.common.dto.StringTypeMessageResponse;
-import com.software.ott.friend.dto.FriendEmailRequest;
-import com.software.ott.friend.dto.FriendRequestResponse;
-import com.software.ott.friend.dto.FriendResponse;
+import com.software.ott.friend.dto.*;
+import com.software.ott.friend.service.FriendRecommendService;
 import com.software.ott.friend.service.FriendService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,6 +20,7 @@ import java.util.List;
 public class FriendController {
 
     private final FriendService friendService;
+    private final FriendRecommendService friendRecommendService;
 
     @Operation(summary = "친구 요청 보내기", description = "친구의 email을 기반으로 친구요청합니다.")
     @PostMapping
@@ -69,5 +69,26 @@ public class FriendController {
     public ResponseEntity<StringTypeMessageResponse> deleteFriend(@RequestAttribute("memberId") Long memberId, @PathVariable Long friendRequestId) {
         friendService.deleteFriend(memberId, friendRequestId);
         return ResponseEntity.ok().body(new StringTypeMessageResponse("친구가 삭제되었습니다."));
+    }
+
+    @Operation(summary = "친구에게 컨텐츠 추천하기", description = "친구에게 컨텐츠를 이유와 함께 추천합니다.")
+    @PostMapping("/recommend/{friendRequestId}")
+    public ResponseEntity<StringTypeMessageResponse> recommendContent(@RequestAttribute("memberId") Long memberId, @PathVariable Long friendRequestId, @RequestBody RecommendContentRequest recommendContentRequest) {
+        friendRecommendService.sendContentRecommend(memberId, friendRequestId, recommendContentRequest);
+        return ResponseEntity.ok().body(new StringTypeMessageResponse("추천이 전송되었습니다."));
+    }
+
+    @Operation(summary = "친구에게 추천받은 컨텐츠들 보기", description = "친구에게 추천받은 컨텐츠들을 조회합니다.")
+    @GetMapping("/recommend")
+    public ResponseEntity<List<FriendRecommendResponse>> getAllRecommendedContents(@RequestAttribute("memberId") Long memberId) {
+        List<FriendRecommendResponse> friendRecommendResponses = friendRecommendService.getAllRecommendedContents(memberId);
+        return ResponseEntity.ok().body(friendRecommendResponses);
+    }
+
+    @Operation(summary = "친구에게 추천받은 컨텐츠 목록에서 삭제", description = "친구에게 추천받은 컨텐츠중 선택한 컨텐츠를 목록에서 삭제합니다.")
+    @DeleteMapping("/recommend/{friendRecommendId}")
+    public ResponseEntity<StringTypeMessageResponse> deleteRecommendContent(@RequestAttribute("memberId") Long memberId, @PathVariable Long friendRecommendId) {
+        friendRecommendService.deleteRecommend(memberId, friendRecommendId);
+        return ResponseEntity.ok().body(new StringTypeMessageResponse("삭제되었습니다."));
     }
 }

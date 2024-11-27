@@ -4,6 +4,7 @@ import com.software.ott.common.exception.BadRequestException;
 import com.software.ott.friend.FriendStatus;
 import com.software.ott.member.entity.Member;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Builder
@@ -17,12 +18,15 @@ public class Friend {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "requester_id")
     private Member requester;
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "accepter_id")
     private Member accepter;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private FriendStatus status;
 

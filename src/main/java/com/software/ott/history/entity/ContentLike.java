@@ -7,12 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
-@Table(
-        indexes = {
-                @Index(name = "idx_contentlike_member_id", columnList = "member_id"),
-                @Index(name = "idx_contentlike_content_id", columnList = "content_id")
-        }
-)
 @Getter
 @Setter
 @Builder

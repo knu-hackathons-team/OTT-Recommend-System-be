@@ -1,4 +1,4 @@
-package com.software.ott.history.entity;
+package com.software.ott.friend.entity;
 
 import com.software.ott.content.entity.Content;
 import com.software.ott.member.entity.Member;
@@ -11,25 +11,35 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Entity
+@Builder
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class WatchHistory {
+public class FriendRecommend {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
+    private Member sender;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "receiver_id")
+    private Member receiver;
+    @NotNull
+    @OneToOne
+    @JoinColumn(name = "content_id")
+    private Content recommendContent;
     @CreatedDate
     @NotNull
-    private LocalDateTime watchDateTime;
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "content_id")
-    private Content content;
+    private LocalDateTime recommendTime;
+    private String reason;
+
+    public boolean NotAuth(Member member) {
+        return !(sender.equals(member) || receiver.equals(member));
+    }
 }
