@@ -6,6 +6,8 @@ import com.software.ott.member.entity.Member;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Builder
 @Getter
@@ -21,10 +23,12 @@ public class Friend {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "requester_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Member requester;
     @NotNull
     @ManyToOne
     @JoinColumn(name = "accepter_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Member accepter;
     @NotNull
     @Enumerated(EnumType.STRING)

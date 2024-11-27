@@ -5,6 +5,8 @@ import com.software.ott.member.entity.Member;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Getter
@@ -21,10 +23,12 @@ public class ContentLike {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "member_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
     @NotNull
     @ManyToOne
     @JoinColumn(name = "content_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Content content;
 
     public boolean memberIsNotCorrect(Member member) {
