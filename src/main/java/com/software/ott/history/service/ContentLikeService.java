@@ -1,5 +1,6 @@
 package com.software.ott.history.service;
 
+import com.software.ott.common.exception.BadRequestException;
 import com.software.ott.common.exception.NotFoundException;
 import com.software.ott.content.entity.Content;
 import com.software.ott.content.repository.ContentRepository;
@@ -68,5 +69,20 @@ public class ContentLikeService {
                     return new TopContentLikeResponse(content, likeCount);
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void deleteContentLike(Long memberId, Long contentLikeId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new NotFoundException("id에 해당하는 컨텐츠를 찾을 수 없습니다."));
+
+        ContentLike contentLike = contentLikeRepository.findById(contentLikeId)
+                .orElseThrow(() -> new NotFoundException("contentId에 해당하는 컨텐츠 선호도 표시가 없습니다."));
+
+        if (contentLike.memberIsNotCorrect(member)) {
+            throw new BadRequestException("삭제할 권한이 없습니다.");
+        }
+
+        contentLikeRepository.delete(contentLike);
     }
 }

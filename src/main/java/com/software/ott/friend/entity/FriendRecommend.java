@@ -40,6 +40,6 @@ public class FriendRecommend {
     private String reason;
 
     public boolean NotAuth(Member member) {
-        return !(sender.equals(member) || receiver.equals(member));
+        return !(this.sender.equals(member) || this.receiver.equals(member));
     }
 }

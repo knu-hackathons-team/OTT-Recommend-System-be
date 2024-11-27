@@ -26,4 +26,8 @@ public class ContentLike {
     @ManyToOne
     @JoinColumn(name = "content_id")
     private Content content;
+
+    public boolean memberIsNotCorrect(Member member) {
+        return !this.member.equals(member);
+    }
 }

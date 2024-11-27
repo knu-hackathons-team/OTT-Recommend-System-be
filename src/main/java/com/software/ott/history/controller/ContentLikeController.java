@@ -40,4 +40,11 @@ public class ContentLikeController {
         List<TopContentLikeResponse> topContentLikeResponses = contentLikeService.getTop10MostLikedContents();
         return ResponseEntity.ok().body(topContentLikeResponses);
     }
+
+    @Operation(summary = "선호도 표시 삭제", description = "사용자의 선호도 표시를 삭제합니다.")
+    @DeleteMapping("{contentLikeId}")
+    public ResponseEntity<StringTypeMessageResponse> deleteContentLike(@RequestAttribute("memberId") Long memberId, @PathVariable Long contentLikeId) {
+        contentLikeService.deleteContentLike(memberId, contentLikeId);
+        return ResponseEntity.ok().body(new StringTypeMessageResponse("삭제되었습니다."));
+    }
 }
