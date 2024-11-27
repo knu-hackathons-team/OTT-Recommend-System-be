@@ -4,6 +4,7 @@ import com.software.ott.common.exception.NotFoundException;
 import com.software.ott.common.exception.UnauthorizedException;
 import com.software.ott.content.entity.Content;
 import com.software.ott.content.repository.ContentRepository;
+import com.software.ott.history.dto.TopWatchHistoryResponse;
 import com.software.ott.history.dto.WatchHistoryResponse;
 import com.software.ott.history.entity.WatchHistory;
 import com.software.ott.history.repository.WatchHistoryRepository;
@@ -63,5 +64,19 @@ public class WatchHistoryService {
                 .orElseThrow(() -> new UnauthorizedException("시청기록을 삭제할 권한이 없습니다."));
 
         watchHistoryRepository.delete(watchHistory);
+    }
+
+    @Transactional
+    public List<TopWatchHistoryResponse> getTop10WatchedContents() {
+        List<Object[]> topContents = watchHistoryRepository.findTop10MostWatchedContents();
+
+        return topContents.stream()
+                .map(result -> {
+                    Content content = (Content) result[0];
+                    long watchCount = (long) result[1];
+
+                    return new TopWatchHistoryResponse(content, watchCount);
+                })
+                .collect(Collectors.toList());
     }
 }

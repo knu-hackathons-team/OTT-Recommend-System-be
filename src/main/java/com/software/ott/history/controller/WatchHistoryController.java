@@ -1,6 +1,7 @@
 package com.software.ott.history.controller;
 
 import com.software.ott.common.dto.StringTypeMessageResponse;
+import com.software.ott.history.dto.TopWatchHistoryResponse;
 import com.software.ott.history.dto.WatchHistoryResponse;
 import com.software.ott.history.service.WatchHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,5 +39,12 @@ public class WatchHistoryController {
     public ResponseEntity<StringTypeMessageResponse> deleteWatchHistory(@RequestAttribute("memberId") Long memberId, @PathVariable("contentId") Long contentId) {
         watchHistoryService.deleteWatchHistory(memberId, contentId);
         return ResponseEntity.ok().body(new StringTypeMessageResponse("시청 기록이 삭제되었습니다."));
+    }
+
+    @Operation(summary = "사용자들 시청기록 TOP10", description = "사용자들의 시청기록들 중 TOP 10을 조회합니다.")
+    @GetMapping("/top")
+    public ResponseEntity<List<TopWatchHistoryResponse>> getTop10WatchedContents() {
+        List<TopWatchHistoryResponse> topWatchHistoryResponses = watchHistoryService.getTop10WatchedContents();
+        return ResponseEntity.ok().body(topWatchHistoryResponses);
     }
 }
