@@ -2,6 +2,7 @@ package com.software.ott.history.controller;
 
 import com.software.ott.common.dto.StringTypeMessageResponse;
 import com.software.ott.history.dto.ContentLikeResponse;
+import com.software.ott.history.dto.TopContentLikeResponse;
 import com.software.ott.history.service.ContentLikeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,5 +32,12 @@ public class ContentLikeController {
     public ResponseEntity<List<ContentLikeResponse>> readAllContentsLikeByMember(@RequestAttribute("memberId") Long memberId, @PathVariable("like") boolean like) {
         List<ContentLikeResponse> contentLikeResponses = contentLikeService.readAllLikeContentsByMember(memberId, like);
         return ResponseEntity.ok().body(contentLikeResponses);
+    }
+
+    @Operation(summary = "사용자들 좋아요한 컨텐츠 TOP10", description = "사용자들의 좋아요한 컨텐츠들 중 TOP 10을 조회합니다.")
+    @GetMapping("/top")
+    public ResponseEntity<List<TopContentLikeResponse>> getTop10MostLikedContents() {
+        List<TopContentLikeResponse> topContentLikeResponses = contentLikeService.getTop10MostLikedContents();
+        return ResponseEntity.ok().body(topContentLikeResponses);
     }
 }

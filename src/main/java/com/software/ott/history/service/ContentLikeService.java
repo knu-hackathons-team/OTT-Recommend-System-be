@@ -4,6 +4,7 @@ import com.software.ott.common.exception.NotFoundException;
 import com.software.ott.content.entity.Content;
 import com.software.ott.content.repository.ContentRepository;
 import com.software.ott.history.dto.ContentLikeResponse;
+import com.software.ott.history.dto.TopContentLikeResponse;
 import com.software.ott.history.entity.ContentLike;
 import com.software.ott.history.repository.ContentLikeRepository;
 import com.software.ott.member.entity.Member;
@@ -52,6 +53,20 @@ public class ContentLikeService {
                 .stream()
                 .map(ContentLike -> new ContentLikeResponse(
                         ContentLike.getContent()))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<TopContentLikeResponse> getTop10MostLikedContents() {
+        List<Object[]> topContents = contentLikeRepository.findTop10MostLikedContents();
+
+        return topContents.stream()
+                .map(result -> {
+                    Content content = (Content) result[0];
+                    long likeCount = (long) result[1];
+
+                    return new TopContentLikeResponse(content, likeCount);
+                })
                 .collect(Collectors.toList());
     }
 }
