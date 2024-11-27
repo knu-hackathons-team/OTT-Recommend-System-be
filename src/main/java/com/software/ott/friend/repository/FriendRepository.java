@@ -11,5 +11,6 @@ import java.util.List;
 @Repository
 public interface FriendRepository extends JpaRepository<Friend, Long> {
     List<Friend> findAllByAccepterIdAndStatusOrRequesterIdAndStatus(Long accepterId, FriendStatus status1, Long requesterId, FriendStatus status2);
+
     boolean existsByRequesterAndAccepter(Member requester, Member accepter);
 }

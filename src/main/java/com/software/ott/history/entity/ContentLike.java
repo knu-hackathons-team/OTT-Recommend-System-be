@@ -30,8 +30,4 @@ public class ContentLike {
     @JoinColumn(name = "content_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Content content;
-
-    public boolean memberIsNotCorrect(Member member) {
-        return !this.member.equals(member);
-    }
 }

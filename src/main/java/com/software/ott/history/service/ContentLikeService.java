@@ -77,7 +77,7 @@ public class ContentLikeService {
     @Transactional
     public void deleteContentLike(Long memberId, Long contentId) {
         ContentLike contentLike = contentLikeRepository.findByMemberIdAndContentId(memberId, contentId)
-                        .orElseThrow(() -> new BadRequestException("선호도를 삭제할 권한이 없습니다."));
+                .orElseThrow(() -> new BadRequestException("선호도를 삭제할 권한이 없습니다."));
 
         contentLikeRepository.delete(contentLike);
     }
