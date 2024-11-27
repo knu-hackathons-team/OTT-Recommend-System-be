@@ -41,10 +41,6 @@ public class FriendRecommendService {
         Content content = contentRepository.findById(recommendContentRequest.contentId())
                 .orElseThrow(() -> new NotFoundException("contentId에 해당하는 컨텐츠가 없습니다."));
 
-        if (!friendRepository.existsByRequesterIdOrAccepterId(memberId, friend.getAccepter().getId()) && !friendRepository.existsByRequesterIdOrAccepterId(friend.getRequester().getId(), memberId)) {
-            throw new BadRequestException("서로 친구 관계가 아닙니다.");
-        }
-
         Member friendMember = null;
 
         if (friend.getAccepter().equals(member)) {
@@ -61,6 +57,10 @@ public class FriendRecommendService {
 
         if (friendRecommendRepository.existsBySenderAndReceiverAndRecommendContent(member, friendMember, content)) {
             throw new BadRequestException("이미 해당 컨텐츠를 상대방에게 추천했습니다.");
+        }
+
+        if (!friendRepository.existsByRequesterAndAccepter(member, friendMember) && !friendRepository.existsByRequesterAndAccepter(friendMember, member)) {
+            throw new BadRequestException("서로 친구 관계가 아닙니다.");
         }
 
         friendRecommendRepository.save(

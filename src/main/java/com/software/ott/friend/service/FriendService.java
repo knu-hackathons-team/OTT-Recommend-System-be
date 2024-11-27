@@ -31,8 +31,12 @@ public class FriendService {
         Member accepterMember = memberRepository.findByEmail(friendEmailRequest.email())
                 .orElseThrow(() -> new NotFoundException("email에 해당하는 멤버가 없습니다."));
 
-        if (friendRepository.existsByRequesterIdOrAccepterId(memberId, memberId)) {
+        if (friendRepository.existsByRequesterAndAccepter(requesterMember, accepterMember) || friendRepository.existsByRequesterAndAccepter(accepterMember, requesterMember)) {
             throw new BadRequestException("이미 친구이거나, 친구요청이 존재합니다.");
+        }
+
+        if (requesterMember.equals(accepterMember)) {
+            throw new BadRequestException("본인에게는 친구 요청을 할 수 없습니다");
         }
 
         friendRepository.save(Friend.builder()

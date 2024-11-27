@@ -42,9 +42,9 @@ public class ContentLikeController {
     }
 
     @Operation(summary = "선호도 표시 삭제", description = "사용자의 선호도 표시를 삭제합니다.")
-    @DeleteMapping("{contentLikeId}")
-    public ResponseEntity<StringTypeMessageResponse> deleteContentLike(@RequestAttribute("memberId") Long memberId, @PathVariable Long contentLikeId) {
-        contentLikeService.deleteContentLike(memberId, contentLikeId);
+    @DeleteMapping("/{contentId}")
+    public ResponseEntity<StringTypeMessageResponse> deleteContentLike(@RequestAttribute("memberId") Long memberId, @PathVariable Long contentId) {
+        contentLikeService.deleteContentLike(memberId, contentId);
         return ResponseEntity.ok().body(new StringTypeMessageResponse("삭제되었습니다."));
     }
 }
