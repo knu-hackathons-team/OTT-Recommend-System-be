@@ -2,6 +2,7 @@ package com.software.ott.friend.service;
 
 import com.software.ott.common.exception.BadRequestException;
 import com.software.ott.common.exception.NotFoundException;
+import com.software.ott.common.service.KakaoMessageService;
 import com.software.ott.content.entity.Content;
 import com.software.ott.content.repository.ContentRepository;
 import com.software.ott.friend.dto.FriendRecommendResponse;
@@ -27,6 +28,7 @@ public class FriendRecommendService {
     private final MemberRepository memberRepository;
     private final FriendRepository friendRepository;
     private final ContentRepository contentRepository;
+    private final KakaoMessageService kakaoMessageService;
 
     @Transactional
     public void sendContentRecommend(Long memberId, Long friendRequestId, RecommendContentRequest recommendContentRequest) {
@@ -68,6 +70,8 @@ public class FriendRecommendService {
                         .recommendContent(content)
                         .reason(recommendContentRequest.reason())
                         .build());
+
+        kakaoMessageService.sendRecommendMessage(member.getEmail(), member.getName(), content.getPosterPath(), content.getTitle(), content.getListedIn(), content.getType(), recommendContentRequest.reason());
     }
 
     @Transactional(readOnly = true)

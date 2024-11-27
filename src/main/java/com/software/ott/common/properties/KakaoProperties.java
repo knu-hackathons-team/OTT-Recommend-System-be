@@ -7,6 +7,7 @@ public record KakaoProperties(
         String clientId,
         String redirectUri,
         String devRedirectUri,
-        String frontUriWithoutHttp
+        String frontUriWithoutHttp,
+        String frontUrl
 ) {
 }
