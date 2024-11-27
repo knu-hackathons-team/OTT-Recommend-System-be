@@ -8,6 +8,7 @@ public record KakaoProperties(
         String redirectUri,
         String devRedirectUri,
         String frontUriWithoutHttp,
-        String frontUrl
+        String frontUrl,
+        String defaultImageUrl
 ) {
 }

@@ -19,7 +19,6 @@ import java.nio.charset.StandardCharsets;
 public class KakaoMessageService {
 
     private static final String KAKAO_SEND_ME_BASE_URL = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
-    private static final String DEFAULT_IMAGE_URL = "https://ifh.cc/g/mjb5nn.jpg";
 
     private final KakaoTokenService kakaoTokenService;
     private final RestTemplate restTemplate;
@@ -37,7 +36,7 @@ public class KakaoMessageService {
         headers.setBearerAuth(accessToken);
 
         if (posterUrl.isEmpty()) {
-            posterUrl = DEFAULT_IMAGE_URL;
+            posterUrl = kakaoProperties.defaultImageUrl();
         }
 
         String templateObject = String.format(

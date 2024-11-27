@@ -71,7 +71,7 @@ public class FriendRecommendService {
                         .reason(recommendContentRequest.reason())
                         .build());
 
-        kakaoMessageService.sendRecommendMessage(member.getEmail(), member.getName(), content.getPosterPath(), content.getTitle(), content.getListedIn(), content.getType(), recommendContentRequest.reason());
+        kakaoMessageService.sendRecommendMessage(friendMember.getEmail(), member.getName(), content.getPosterPath(), content.getTitle(), content.getListedIn(), content.getType(), recommendContentRequest.reason());
     }
 
     @Transactional(readOnly = true)
