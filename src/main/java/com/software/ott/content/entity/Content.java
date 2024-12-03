@@ -15,8 +15,8 @@ import lombok.*;
                 @Index(name = "idx_title", columnList = "title"),
                 @Index(name = "idx_listedIn", columnList = "listedIn"),
                 @Index(name = "idx_director", columnList = "director"),
-                @Index(name = "idx_cast", columnList = "cast"),
-                @Index(name = "idx_title_director_listedIn_cast", columnList = "title, director, listedIn, cast")
+                @Index(name = "idx_castMember", columnList = "castMember"),
+                @Index(name = "idx_title_director_listedIn_castMember", columnList = "title, director, listedIn, castMember")
         }
 )
 public class Content {
