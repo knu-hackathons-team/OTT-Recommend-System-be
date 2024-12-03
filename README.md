@@ -12,10 +12,13 @@
 - 영상 시청 기능 제한: 법적 문제로 인해 실제 영상을 시청하는 기능은 제공하지 않으며, 시청 기록만 서버에 남깁니다. 대신, 넷플릭스 메인 홈페이지로 이동시킵니다.
 - 추천 알고리즘의 목적: 넷플릭스의 영상 추천 방식을 참고하여, 유사한 추천 알고리즘을 구축하는 것이 목표입니다.
 
-## Usecase Diagram
+## Usecase Diagram (비즈니스 관점)
 <img width="554" alt="image" src="https://github.com/user-attachments/assets/547e1dd9-537c-4f3a-bfed-825b31148a18">
 
-## ERD
+## Class Diagram (비즈니스 관점)
+![image](https://github.com/user-attachments/assets/85b11d89-3c52-45d9-b914-8ede4353aea2)
+
+## ERD (코드 관점)
 <img width="779" alt="image" src="https://github.com/user-attachments/assets/7e413630-c062-458c-92ff-178c684f97c3">
 
 ## API 명세서
