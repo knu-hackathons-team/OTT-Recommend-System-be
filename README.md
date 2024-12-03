@@ -13,10 +13,10 @@
 - 추천 알고리즘의 목적: 넷플릭스의 영상 추천 방식을 참고하여, 유사한 추천 알고리즘을 구축하는 것이 목표입니다.
 
 ## Usecase Diagram
-![image](https://github.com/user-attachments/assets/a9be3c6e-51e8-40d6-be4d-8ef297613363)
+<img width="554" alt="image" src="https://github.com/user-attachments/assets/547e1dd9-537c-4f3a-bfed-825b31148a18">
 
 ## ERD
-![image](https://github.com/user-attachments/assets/0deeb25c-6a0e-4c7f-a5ae-08baf2cab785)
+<img width="779" alt="image" src="https://github.com/user-attachments/assets/7e413630-c062-458c-92ff-178c684f97c3">
 
 ## API 명세서
 ### Swagger 링크
