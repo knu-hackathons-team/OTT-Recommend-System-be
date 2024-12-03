@@ -16,7 +16,7 @@
 <img width="554" alt="image" src="https://github.com/user-attachments/assets/547e1dd9-537c-4f3a-bfed-825b31148a18">
 
 ## Class Diagram (비즈니스 관점)
-![image](https://github.com/user-attachments/assets/85b11d89-3c52-45d9-b914-8ede4353aea2)
+<img width="554" alt="image" src="https://github.com/user-attachments/assets/85b11d89-3c52-45d9-b914-8ede4353aea2">
 
 ## ERD (코드 관점)
 <img width="779" alt="image" src="https://github.com/user-attachments/assets/7e413630-c062-458c-92ff-178c684f97c3">
