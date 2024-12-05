@@ -19,7 +19,7 @@
 <img width="554" alt="image" src="https://github.com/user-attachments/assets/32789ee0-7958-46dc-90b7-a3c3c1a0e95f">
 
 ## Activity Diagram (비즈니스 관점)
-<img width="839" alt="image" src="https://github.com/user-attachments/assets/fcced1e1-1645-4a87-b679-7865ecea4d71">
+<img width="839" alt="image" src="https://github.com/user-attachments/assets/1f3073c6-ee78-4c97-882a-517e88cb4f0e">
 
 ## ERD (코드 관점)
 <img width="779" alt="image" src="https://github.com/user-attachments/assets/7e413630-c062-458c-92ff-178c684f97c3">
