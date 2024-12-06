@@ -23,7 +23,7 @@ public class CsvContentService {
     private final ContentRepository contentRepository;
 
     @Transactional
-    public void saveContentFromCsv() {
+    public void saveContentFromCsv() { //csv 파일을 db에 삽입하는 로직
         try {
             ClassPathResource resource = new ClassPathResource("content_poster.csv");
             BufferedReader reader = new BufferedReader(
