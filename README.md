@@ -11,33 +11,31 @@
 - 추천 알고리즘의 목적: 넷플릭스의 영상 추천 방식을 참고하여, 유사한 추천 알고리즘을 구축하는 것이 목표입니다.
 
 ## Usecase Diagram (비즈니스 관점)
-<img width="554" alt="image" src="https://github.com/user-attachments/assets/84a31664-cb2f-48ac-bb42-764e7eda80c7">
-
-## Class Diagram (비즈니스 관점)
-<img width="554" alt="image" src="https://github.com/user-attachments/assets/64bb3fb1-d59b-45ca-9f02-5c6a3154780d">
+<img width="554" alt="image" src="https://github.com/user-attachments/assets/5e1878a1-f09e-447e-b80b-6b745184d76d">
 
 ## Activity Diagram (비즈니스 관점)
-<img width="839" alt="image" src="https://github.com/user-attachments/assets/f5bcc8c9-85b6-402a-b428-d883f0a207e4">
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/5cfbe099-6404-4984-b21e-378d904aca88">
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/3bfb19aa-a0b4-4c16-8d85-f33d6610d5d5">
+
+## Class Diagram (비즈니스 관점)
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/774c98a6-3f7b-4326-bde9-14f515b11a08">
 
 ## Sequence Diagram (비즈니스 관점)
 
-### 검색하여 보기
-<img width="554" alt="image" src="https://github.com/user-attachments/assets/aaa021c8-e656-4f6e-8120-c90af8e99151">
+### 콘텐츠 검색
+<img width="554" alt="image" src="https://github.com/user-attachments/assets/f5548f8e-d28a-4e14-8997-ef1fade5b369">
 
-### 추천받아 보기
-<img width="554" alt="image" src="https://github.com/user-attachments/assets/ce33b456-3a46-46c3-b194-7b0ec990a461">
+### 콘텐츠 추천
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/c928c586-14ab-4629-b4ac-f49e1a52ff50">
 
-### 콘텐츠 평가하기
-<img width="554" alt="image" src="https://github.com/user-attachments/assets/e9c2088d-c2c1-4d92-aed5-ddd3de905ba4">
+### 콘텐츠 평가
+<img width="554" alt="image" src="https://github.com/user-attachments/assets/3a8515c8-a8b6-4c11-bb35-ee87074c3670">
 
-### 친구 추가
-<img width="554" alt="image" src="https://github.com/user-attachments/assets/d6d1e816-52eb-4134-abe2-5c507958b836">
+### 친구 등록
+<img width="554" alt="image" src="https://github.com/user-attachments/assets/f0d9de81-d83f-4da0-8ed9-d05d4553be0e">
 
-### 친구 삭제
-<img width="554" alt="image" src="https://github.com/user-attachments/assets/1fbb77cd-01c1-4889-9b0d-c2d3c1e980af">
-
-### 친구와 컨텐츠 공유
-<img width="554" alt="image" src="https://github.com/user-attachments/assets/9c907105-f163-4a33-94fc-3314eafa5ef8">
+### 친구와 콘텐츠 공유
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/d16fb3a3-d237-4d6b-85ba-8193cd77d8de">
 
 ## ERD (코드 관점)
 <img width="779" alt="image" src="https://github.com/user-attachments/assets/7e413630-c062-458c-92ff-178c684f97c3">
