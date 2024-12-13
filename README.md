@@ -26,7 +26,7 @@
 <img width="554" alt="image" src="https://github.com/user-attachments/assets/86f3005b-0bc6-45ba-a21b-9c5e413bd688">
 
 ### 콘텐츠 추천
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/c928c586-14ab-4629-b4ac-f49e1a52ff50">
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/9793cef0-92d3-4d9c-a678-b6a79815dcaa">
 
 ### 콘텐츠 평가
 <img width="554" alt="image" src="https://github.com/user-attachments/assets/3a8515c8-a8b6-4c11-bb35-ee87074c3670">
