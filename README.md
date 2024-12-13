@@ -23,7 +23,7 @@
 ## Sequence Diagram (비즈니스 관점)
 
 ### 콘텐츠 검색
-<img width="554" alt="image" src="https://github.com/user-attachments/assets/f5548f8e-d28a-4e14-8997-ef1fade5b369">
+<img width="554" alt="image" src="https://github.com/user-attachments/assets/86f3005b-0bc6-45ba-a21b-9c5e413bd688">
 
 ### 콘텐츠 추천
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/c928c586-14ab-4629-b4ac-f49e1a52ff50">
