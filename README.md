@@ -18,7 +18,7 @@
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/3bfb19aa-a0b4-4c16-8d85-f33d6610d5d5">
 
 ## Class Diagram (비즈니스 관점)
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/0146ec81-8b3b-47f4-81bc-00bb28add50b">
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/05bb1ab5-97a1-4e45-85d8-c3ed5d075c36">
 
 ## Sequence Diagram (비즈니스 관점)
 
@@ -38,7 +38,7 @@
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/bea02b62-4bd6-4acb-98c1-07ecd85a4c2a">
 
 ## ERD (코드 관점)
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/dea96a5c-458d-4b34-bd32-e3ffdec70a0b">
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/a6af86a9-857c-4c33-84fc-47626265a60a">
 
 ## API 명세서
 ### Swagger 링크
