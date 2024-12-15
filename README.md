@@ -45,4 +45,4 @@
 ### [http://ott.knu-soft.site/swagger-ui/index.html](http://ott.knu-soft.site/swagger-ui/index.html#/)
 
 ## 웹 서버 아키텍쳐
-![image](https://github.com/user-attachments/assets/0fa26690-aa28-4986-8d59-61cea6867b24)
+![image](https://github.com/user-attachments/assets/3c2062b5-5589-4b3d-9f04-8521d6f59ce5)
