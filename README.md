@@ -18,31 +18,31 @@
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/3bfb19aa-a0b4-4c16-8d85-f33d6610d5d5">
 
 ## Class Diagram (비즈니스 관점)
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/774c98a6-3f7b-4326-bde9-14f515b11a08">
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/0146ec81-8b3b-47f4-81bc-00bb28add50b">
 
 ## Sequence Diagram (비즈니스 관점)
 
 ### 콘텐츠 검색
-<img width="554" alt="image" src="https://github.com/user-attachments/assets/86f3005b-0bc6-45ba-a21b-9c5e413bd688">
+<img width="554" alt="image" src="https://github.com/user-attachments/assets/538ea7f1-a5e8-43d1-932b-f9c14eb474a2">
 
 ### 콘텐츠 추천
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/9793cef0-92d3-4d9c-a678-b6a79815dcaa">
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/958c6ed4-6ab9-4377-b07f-667758dcc133">
 
 ### 콘텐츠 평가
-<img width="554" alt="image" src="https://github.com/user-attachments/assets/3a8515c8-a8b6-4c11-bb35-ee87074c3670">
+<img width="554" alt="image" src="https://github.com/user-attachments/assets/97251720-de68-4a58-9b3b-4205ce71744f">
 
 ### 친구 등록
-<img width="554" alt="image" src="https://github.com/user-attachments/assets/f0d9de81-d83f-4da0-8ed9-d05d4553be0e">
+<img width="554" alt="image" src="https://github.com/user-attachments/assets/c6aca36e-a0bb-4668-847b-4037dd2d14e3">
 
 ### 친구와 콘텐츠 공유
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/d16fb3a3-d237-4d6b-85ba-8193cd77d8de">
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/bea02b62-4bd6-4acb-98c1-07ecd85a4c2a">
 
 ## ERD (코드 관점)
-<img width="779" alt="image" src="https://github.com/user-attachments/assets/7e413630-c062-458c-92ff-178c684f97c3">
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/dea96a5c-458d-4b34-bd32-e3ffdec70a0b">
 
 ## API 명세서
 ### Swagger 링크
 ### [http://ott.knu-soft.site/swagger-ui/index.html](http://ott.knu-soft.site/swagger-ui/index.html#/)
 
 ## 웹 서버 아키텍쳐
-![image](https://github.com/user-attachments/assets/cab60980-9e15-44f4-91b9-37c761688055)
+![image](https://github.com/user-attachments/assets/0fa26690-aa28-4986-8d59-61cea6867b24)
